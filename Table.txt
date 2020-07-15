@@ -1,48 +1,5 @@
-create table raw_material (
-  id int AUTO_INCREMENT,
-  name varchar(20),
-  supplier varchar(30),
-  description varchar(50),
-  price decimal(8,3),
-  PRIMARY KEY(id)
-);
 
-
-create table component_material (
-  id int AUTO_INCREMENT,
-  name varchar(20),
-  supplier varchar(30),
-  description varchar(50),
-  price decimal(8,3),
-  PRIMARY KEY(id)
-);
-
-
-create table finished_Product (
-  id int AUTO_INCREMENT,
-  name varchar(20),
-  description varchar(50),
-  price decimal(8,3),
-  PRIMARY KEY(id)
-);
-
-create table purchase_details (
-orderId integer AUTO_INCREMENT,
-rawQuantity long,
-componentQuantity long,
-totalPrice decimal(10,3),
-Primary Key (orderId)
-);
-
-create table sales_details (
-saleId integer AUTO_INCREMENT,
-finishedQuantity long,
-totalPrice decimal(10,3),
-Primary Key (saleId)
-);
-
-----------
-create table productList (
+create table product (
 id integer AUTO_INCREMENT,
 productname varchar(20),
 producttype varchar(20),
@@ -50,8 +7,7 @@ stock numeric,
 suppliername varchar(20),
 price decimal(8,3),
 Primary Key (id)
-);
-
+)
 create table finishedProduct (
   id int AUTO_INCREMENT,
   name varchar(20),
