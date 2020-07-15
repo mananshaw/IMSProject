@@ -1,10 +1,11 @@
 package com.manan.springcloud.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manan.springcloud.model.Product;
@@ -19,21 +20,21 @@ public class ProductRestController {
 	@Autowired
 	ProductRepo productrepo;
 	
-	@RequestMapping(value="products", method=RequestMethod.POST)
+	@PostMapping(value="products")
 	public Product createProduct(@RequestBody Product product) {
 		
 		return productrepo.save(product);
 		
 	}
 	
-	@RequestMapping(value="/products/{productname}", method = RequestMethod.GET)
+	@GetMapping(value="/products/{productname}")
 	public Product getProduct(@PathVariable("productname") String productname)  {
 		
 		return productrepo.findByProductname(productname);
 		
 	}
 	
-	@RequestMapping(value="/orderid/{id}", method = RequestMethod.GET)
+	@GetMapping(value="/orderid/{id}")
 	public Product getProduct(@PathVariable("id") int id)  {
 		
 		return productrepo.findById(id);
