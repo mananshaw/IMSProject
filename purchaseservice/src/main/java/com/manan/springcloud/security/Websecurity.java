@@ -1,31 +1,33 @@
-/*package com.manan.springcloud.security;
 
-import org.springframework.context.annotation.Bean;
+package com.manan.springcloud.security;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class Websecurity extends WebSecurityConfigurerAdapter {
 
+	private static final Logger logger = LoggerFactory.getLogger(Websecurity.class);
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		System.out.println("Inside Websecurity class");
+		logger.info("Inside Websecurity class in configure method");
 		
-		auth.inMemoryAuthentication().withUser("user1").password("password").roles("USER");
+		
+		
+		auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+		
+		logger.info("Inside Websecurity class in configure method");
 	}
 	
-	@Bean
-	public PasswordEncoder getPasswordEncoder( ) {
-		return NoOpPasswordEncoder.getInstance();
-	}
+
 	
 	
 	
@@ -34,8 +36,8 @@ public class Websecurity extends WebSecurityConfigurerAdapter {
 		
 		
 		http.authorizeRequests()
-		.antMatchers("/ims/update/dtd/")
-		.hasRole("USER")
+		.antMatchers("/purchase/*")
+		.hasRole("ADMIN")
 		.and()
 		.formLogin();
 		       
@@ -47,4 +49,4 @@ public class Websecurity extends WebSecurityConfigurerAdapter {
 	
 	
 }
-*/
+

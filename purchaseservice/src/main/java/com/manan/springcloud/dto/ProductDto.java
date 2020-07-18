@@ -2,10 +2,10 @@ package com.manan.springcloud.dto;
 
 import java.math.BigDecimal;
 
-import lombok.Data;
-
 
 public class ProductDto {
+	
+	
 	
 	private int id;
 	private String productname ;
