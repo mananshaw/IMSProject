@@ -17,8 +17,10 @@ public class Productconverter {
 
 	public  ProductDto entityToDto(Product product) {
 
+		
 		ProductDto dto = new ProductDto();
 
+		
 		logger.info("inside Productconverter class in entityToDto method ");
 
 		dto.setId(product.getId());

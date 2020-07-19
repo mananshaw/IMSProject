@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manan.springcloud.converter.Productconverter;
 import com.manan.springcloud.dto.ProductDto;
 import com.manan.springcloud.entity.Product;
+import com.manan.springcloud.exception.UserServiceException;
 import com.manan.springcloud.repo.ProductRepo;
+import com.manan.springcloud.response.Response;
 
 @RestController
 
@@ -40,35 +44,42 @@ public class ProductRestController {
 		logger.info("Inside postmapping createproduct method");
 
 		Product product = converter.dtoToEntity(dto);
+		
 		product = productrepo.save(product);
 
 		logger.warn("Inside postmapping createproduct method");
-
+		
 		return converter.entityToDto(product);
 
 	}
 
-/*	@GetMapping(value = "/findAll")
-	public List<ProductDto> getProduct() {
-
-		logger.info("Inside getmapping request call, getProduct method");
-
-		List<Product> product = productrepo.findAll();
-
-		logger.error("Inside getmapping request call, getProduct method");
-
-		return converter.entityToDto(product);
-
-	}*/
-
+	
+	  @GetMapping(value = "/findAll") 
+	  
+	  public Response getProduct() {
+	 
+	 logger.info("Inside getmapping request call, getProduct method");
+	 
+	  List<Product> product = productrepo.findAll();
+	  		 
+	  
+	  logger.error("Inside getmapping request call, getProduct method");
+        
+	  return new Response("records count: " +product.size(),Boolean.TRUE);
+	  }
+	 
 
 	@PutMapping(value = "/{id}")
 	@CachePut(value = "product", key = "#id")
-	public ProductDto updateProduct(@PathVariable("id") int id, @RequestBody ProductDto dto) {
+	public ProductDto updateProduct(@PathVariable("id") int id, @RequestBody ProductDto dto) throws UserServiceException {
 
 		logger.info("Inside putmapping by id request call, updateProduct method");
 
 		Product product = converter.dtoToEntity(dto);
+		
+		
+			
+		
 
 		product = productrepo.save(product);
 
@@ -83,14 +94,15 @@ public class ProductRestController {
 	public void deleteProduct(@PathVariable("id") int id) {
 
 		logger.info("Inside deletemapping by id request call, deleteProduct method");
-
+        
+	
+		
 		productrepo.deleteById(id);
 
 		logger.info("Inside deletemapping by id request call, deleteProduct method");
 
 	}
-	
-	
+
 	@GetMapping(value = "{id}")
 	@Cacheable(value = "product", key = "#id")
 	public ProductDto getProduct(@PathVariable("id") int id) {
@@ -98,13 +110,11 @@ public class ProductRestController {
 		logger.info("Inside getmapping by id request call, getProduct method");
 
 		Product product = productrepo.findById(id);
-	
+			
 
 		logger.error("Inside getmapping by id request call, getProduct method");
-		
-		
-		
-		return converter.entityToDto(product); 
+
+		return converter.entityToDto(product);
 
 	}
 

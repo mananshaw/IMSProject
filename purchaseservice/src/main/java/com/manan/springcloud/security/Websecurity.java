@@ -4,19 +4,20 @@ package com.manan.springcloud.security;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+/* import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
-@EnableWebSecurity
-public class Websecurity extends WebSecurityConfigurerAdapter {
+//@Configuration
+//@EnableWebSecurity*/
+public class Websecurity //extends WebSecurityConfigurerAdapter 
+{
 
 	private static final Logger logger = LoggerFactory.getLogger(Websecurity.class);
 	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//	@Override
+/*	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
 		logger.info("Inside Websecurity class in configure method");
 		
@@ -44,7 +45,7 @@ public class Websecurity extends WebSecurityConfigurerAdapter {
 		      
 	}
 	
-	
+	*/
 	
 	
 	
