@@ -12,6 +12,16 @@ private int id;
 	private long stock;
 	private BigDecimal price;
 	
+	public FinishedproductDto() {}
+	
+	public FinishedproductDto(int id, String name, String description, long stock, BigDecimal price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.stock = stock;
+		this.price = price;
+	}
 	public int getId() {
 		return id;
 	}

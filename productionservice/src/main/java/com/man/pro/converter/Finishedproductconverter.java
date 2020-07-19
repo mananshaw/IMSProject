@@ -28,9 +28,11 @@ public FinishedproductDto entityToDto(Finishedproduct finishedproduct) {
 		dto.setId(finishedproduct.getId());
 		dto.setName(finishedproduct.getName());
 		dto.setDescription(finishedproduct.getDescription());
-		logger.error("inside entityToDto method");	
+		
 		dto.setStock(finishedproduct.getStock());
 		dto.setPrice(finishedproduct.getPrice());
+		
+		logger.error("inside entityToDto method");	
 		return dto;
 	}
 	

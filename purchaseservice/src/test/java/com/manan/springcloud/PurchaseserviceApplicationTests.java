@@ -79,7 +79,7 @@ class PurchaseserviceApplicationTests {
 		
 		
 		MvcResult result = mockMvc.perform(
-				get("/purchase//findAll")
+				get("/purchase/findAll")
 		                    .content(MediaType.APPLICATION_JSON_VALUE)).andExpect(status().isOk())
                              .andReturn();
 		

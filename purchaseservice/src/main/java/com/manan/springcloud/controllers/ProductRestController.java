@@ -71,17 +71,15 @@ public class ProductRestController {
 
 	@PutMapping(value = "/{id}")
 	@CachePut(value = "product", key = "#id")
-	public ProductDto updateProduct(@PathVariable("id") int id, @RequestBody ProductDto dto) throws UserServiceException {
+	public ProductDto updateProduct(@PathVariable("id") int id, @RequestBody ProductDto dto)  {
 
 		logger.info("Inside putmapping by id request call, updateProduct method");
 
 		Product product = converter.dtoToEntity(dto);
-		
-		
-			
+					
 		
 
-		product = productrepo.save(product);
+		 productrepo.save(product);
 
 		logger.error("Inside putmapping by id request call, updateProduct method");
 

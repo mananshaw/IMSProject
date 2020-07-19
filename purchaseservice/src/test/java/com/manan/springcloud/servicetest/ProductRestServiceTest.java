@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -52,7 +53,9 @@ class ProductRestServiceTest {
 	
 
 	@Test
-	final void testGetProduct() {
+	final void testGetProduct() throws Exception {
+		
+		
 		
 		product.setId(1);
 		product.setProductname("Cement");
@@ -98,26 +101,49 @@ class ProductRestServiceTest {
 	
 	
 	
+	
 	 @Test
 	final void testUpdateProduct( ) {
 		
-		product.setId(1);
-		product.setProductname("Cement");
-		product.setStock(10);
-		product.setSuppliername("Manan");
-		product.setPrice(new BigDecimal("12"));
-		product.setProducttype("raw");
+		 productDto.setId(1);
+		 productDto.setProductname("Cement");
+		 productDto.setStock(10);
+		 productDto.setSuppliername("Manan");
+		 productDto.setPrice(new BigDecimal("12"));
+		 productDto.setProducttype("raw");
 		
-		//when(productrepo.findById(product.getId())).thenReturn(product);
+		when(productrepo.findById(anyInt())).thenReturn(product);
 		
-		when(converter.dtoToEntity(productDto)).thenReturn(product);
+	//	when(converter.dtoToEntity(productDto)).thenReturn(product);
 		
 		
 		productDto = productRestController.updateProduct(1, productDto);
 		
-		assertNotNull(productDto);
+		assertNotNull(product);
 		
 	} 
+	 
+	 @Test
+	 final void GetProdductByIdTest() {
+		 
+		 product.setId(1);
+		 product.setProductname("Cement");
+		 product.setStock(10);
+		 product.setSuppliername("Manan");
+		 product.setPrice(new BigDecimal("12"));
+		 product.setProducttype("raw");
+		 
+	
+		 when(productrepo.findById(anyInt())).thenReturn(product);
+		 productDto = productRestController.getProduct(1);
+		 
+		 assertNotNull(productDto);
+		 assertEquals("Cement", productDto.getProductname());
+		 
+	 }
+	 
+	 
+	
 	
 
 }

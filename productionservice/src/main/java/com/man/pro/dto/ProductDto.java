@@ -14,6 +14,18 @@ public class ProductDto {
 	private String suppliername ;
 	private BigDecimal price;
 	
+	public ProductDto() {}
+	
+	public ProductDto(int id, String productname, String producttype, long stock, String suppliername,
+			BigDecimal price) {
+		super();
+		this.id = id;
+		this.productname = productname;
+		this.producttype = producttype;
+		this.stock = stock;
+		this.suppliername = suppliername;
+		this.price = price;
+	}
 	public int getId() {
 		return id;
 	}
