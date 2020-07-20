@@ -27,21 +27,21 @@ public class SaleController {
 
 	
 	@GetMapping(value="/saleid/{id}")
-	@Cacheable(value="product",key="id")
-	public FinishedproductDto getSaleproduct(@PathVariable ("id") int id ) {
+	//@Cacheable(value="product",key="id")
+	public  ResponseEntity<FinishedproductDto> getSaleproduct(@PathVariable ("id") int id ) {
 		
 		System.out.println("Rest Template Test");
 		
-	//	restTemplate.getInterceptors().add(
-		//		  new BasicAuthorizationInterceptor("admin", "password"));
+		restTemplate.getInterceptors().add(
+				  new BasicAuthorizationInterceptor("admin", "password"));
 		
 		logger.error("inside SaleController / getSaleproduct method");
 		
-		return restTemplate.getForObject("http://localhost:8083/production/findbyid/"+id, FinishedproductDto.class);
+		//return restTemplate.getForObject("http://localhost:8083/production/findbyid/1", FinishedproductDto.class);
 	
-	/*	return restTemplate.exchange(
+		return restTemplate.exchange(
 				  "http://localhost:8083/production/findbyid/" +id, 
-				  HttpMethod.GET, null, FinishedproductDto.class);	*/	 
+				  HttpMethod.GET, null, FinishedproductDto.class);	 
 		 
 	       
 	}

@@ -1,9 +1,11 @@
 package com.man.pro.servicetestcase;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyObject;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThrows;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyObject;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
@@ -27,7 +29,7 @@ class ProductionServiceTestCase {
 	FinishedproductController finishedproductController;
 
 	@Mock
-	FinishedproductRepo finishedproductRepo;
+	FinishedproductRepo repo;
 
 	@Spy
 	Finishedproductconverter converter;
@@ -49,7 +51,7 @@ class ProductionServiceTestCase {
 		finishedproduct.setDescription("Raw material");
 		finishedproduct.setPrice(new BigDecimal("12"));
 
-		when(finishedproductRepo.findById(anyInt())).thenReturn(finishedproduct);
+		when(repo.findById(anyInt())).thenReturn(finishedproduct);
 
 		finishedproductDto = finishedproductController.getFinishedproduct(1);
 
@@ -67,7 +69,7 @@ class ProductionServiceTestCase {
 		finishedproduct.setDescription("Raw material");
 		finishedproduct.setPrice(new BigDecimal("12"));
 
-		when(finishedproductRepo.save(anyObject())).thenReturn(finishedproduct);
+		when(repo.save(anyObject())).thenReturn(finishedproduct);
 
 		finishedproductDto = finishedproductController.createFinishedProduct(finishedproductDto);
 
@@ -85,12 +87,12 @@ class ProductionServiceTestCase {
 		finishedproductDto.setDescription("Raw material");
 		finishedproductDto.setPrice(new BigDecimal("12"));
 
-		when(finishedproductRepo.findById(anyInt())).thenReturn(finishedproduct);
+		when(repo.findById(anyInt())).thenReturn(finishedproduct);
 
 		finishedproductDto = finishedproductController.updateFinishedproduct(1, finishedproductDto);
 
 		assertNotNull(finishedproduct);
 
-	}
+	} 
 
 }
