@@ -2,7 +2,7 @@ package com.manan.springcloud.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.manan.springcloud.model.Product;
+import com.manan.springcloud.entity.Product;
 
 public interface ProductRepo extends JpaRepository<Product, Integer> {
 
