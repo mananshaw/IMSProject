@@ -27,7 +27,7 @@ public class Websecurity extends WebSecurityConfigurerAdapter
 		
 		
 		
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("user")
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
 		.and().withUser("admin").password("password").roles("USER","ADMIN");
 		
 		logger.info("Inside Websecurity class in configure method");

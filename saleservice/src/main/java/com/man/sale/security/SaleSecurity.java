@@ -27,7 +27,7 @@ private static final Logger logger = LoggerFactory.getLogger(SaleSecurity.class)
 		
 		
 		
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("user")
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
 		.and().withUser("admin").password("password").roles("USER","ADMIN");
 		
 		logger.info("Inside Websecurity class in configure method");
@@ -44,14 +44,13 @@ private static final Logger logger = LoggerFactory.getLogger(SaleSecurity.class)
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		
+		String dept="sale";
 		
 		http.httpBasic().and().authorizeRequests()
-		    .antMatchers(HttpMethod.GET,"/sale/**").hasRole("USER")
-		     .antMatchers(HttpMethod.POST,"/sale/**").hasRole("ADMIN")
-		     .antMatchers(HttpMethod.DELETE, "/sale/**").hasRole("ADMIN")
+		    .antMatchers(HttpMethod.GET,"/"+dept+"/**").hasRole("USER")
+		     .antMatchers(HttpMethod.POST,"/"+dept+"/**").hasRole("ADMIN")
+		     .antMatchers(HttpMethod.DELETE, "/"+dept+"/**").hasRole("ADMIN")
 		     .and().csrf().disable().formLogin().disable();
-		
 		
 		
 		       

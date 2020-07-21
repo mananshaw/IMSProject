@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.manan.springcloud.converter.Productconverter;
 import com.manan.springcloud.dto.ProductDto;
 import com.manan.springcloud.entity.Product;
-import com.manan.springcloud.exception.UserServiceException;
 import com.manan.springcloud.repo.ProductRepo;
 import com.manan.springcloud.response.Response;
 
@@ -56,16 +53,17 @@ public class ProductRestController {
 	
 	  @GetMapping(value = "/findAll") 
 	  
-	  public Response getProduct() {
+	  public List<ProductDto> getProduct() {
 	 
 	 logger.info("Inside getmapping request call, getProduct method");
 	 
 	  List<Product> product = productrepo.findAll();
 	  		 
+	  List<ProductDto> productDto = converter.entityToDto(product);
 	  
 	  logger.error("Inside getmapping request call, getProduct method");
         
-	  return new Response("records count: " +product.size(),Boolean.TRUE);
+	  return productDto;
 	  }
 	 
 

@@ -3,7 +3,8 @@ package com.man.sale.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
+
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
@@ -23,25 +24,27 @@ public class SaleController {
 	@Autowired
 	RestTemplate restTemplate;
 	
+	@Autowired
+	Environment env;
+	
 	private static final Logger logger = LoggerFactory.getLogger(SaleController.class);
 
 	
 	@GetMapping(value="/saleid/{id}")
-	//@Cacheable(value="product",key="id")
 	public  ResponseEntity<FinishedproductDto> getSaleproduct(@PathVariable ("id") int id ) {
 		
-		System.out.println("Rest Template Test");
 		
 		restTemplate.getInterceptors().add(
-				  new BasicAuthorizationInterceptor("admin", "password"));
+				  new BasicAuthorizationInterceptor(env.getProperty("sale.dept.user"), env.getProperty("sale.dept.pass")));
 		
 		logger.error("inside SaleController / getSaleproduct method");
 		
-		//return restTemplate.getForObject("http://localhost:8083/production/findbyid/1", FinishedproductDto.class);
-	
-		return restTemplate.exchange(
-				  "http://localhost:8083/production/findbyid/" +id, 
-				  HttpMethod.GET, null, FinishedproductDto.class);	 
+		
+		logger.info("Test getSaleproduct method");
+		
+		
+		return restTemplate.exchange(env.getProperty("production.get.url") +id, 
+				  HttpMethod.GET, null, FinishedproductDto.class);
 		 
 	       
 	}

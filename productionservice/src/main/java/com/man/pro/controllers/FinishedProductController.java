@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
@@ -32,6 +33,9 @@ public class FinishedproductController {
 
 	@Autowired
 	Finishedproductconverter converter;
+	
+	@Autowired
+	Environment env;
 
 	@Autowired
 	RestTemplate restTemplate;
@@ -80,23 +84,20 @@ public class FinishedproductController {
 		return converter.entityToDto(finishedproduct);
 	}
 
-	@GetMapping(value = "{id}")
-//	@Cacheable(value = "product" , key = "#id")
-	
+	@GetMapping(value = "{id}")	
 	public ResponseEntity<ProductDto> getProduct(@PathVariable("id") int id) {
 
 		logger.info("getProductby id method...");
 		logger.error("getProduct method.....Trace Msg");
 		
 		restTemplate.getInterceptors().add(
-				  new BasicAuthorizationInterceptor("admin", "password"));
+				  new BasicAuthorizationInterceptor(env.getProperty("pro.dept.user"), env.getProperty("pro.dept.pass")));
 		
 		logger.trace("getProduct  method.....Trace Msg");
 
-		//return restTemplate.getForObject("http://localhost:8081/purchase/findbyid/" + id, ProductDto.class);
-	 
-			return restTemplate.exchange(
-					  "http://localhost:8081/purchase/" +id, 
+			
+			
+			return restTemplate.exchange(env.getProperty("production.get.url") +id, 
 					  HttpMethod.GET, null, ProductDto.class);
 	
 	}
