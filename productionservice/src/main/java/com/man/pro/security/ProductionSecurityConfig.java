@@ -1,5 +1,4 @@
-
-package com.manan.springcloud.security;
+package com.man.pro.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+
 @Configuration
 @EnableWebSecurity
-public class Websecurity extends WebSecurityConfigurerAdapter 
-{
-
-	private static final Logger logger = LoggerFactory.getLogger(Websecurity.class);
+public class ProductionSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ProductionSecurityConfig.class);
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -39,17 +39,16 @@ public class Websecurity extends WebSecurityConfigurerAdapter
 		return NoOpPasswordEncoder.getInstance();
 	}
 
-	
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		
 		
 		http.httpBasic().and().authorizeRequests()
-		    .antMatchers(HttpMethod.GET,"/purchase/**").hasRole("USER")
-		     .antMatchers(HttpMethod.POST,"/purchase/**").hasRole("ADMIN")
-		     .antMatchers(HttpMethod.DELETE, "/purchase/**").hasRole("ADMIN")
+		    .antMatchers(HttpMethod.GET,"/production/**").hasRole("USER")
+		     .antMatchers(HttpMethod.POST,"/production/**").hasRole("ADMIN")
+		     .antMatchers(HttpMethod.DELETE, "/production/**").hasRole("ADMIN")
 		     .and().csrf().disable().formLogin().disable();
 		
 		
@@ -57,10 +56,7 @@ public class Websecurity extends WebSecurityConfigurerAdapter
 		       
 		      
 	}
-	
-	
-	
-	
-	
-}
 
+	 
+
+}

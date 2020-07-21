@@ -1,5 +1,4 @@
-
-package com.manan.springcloud.security;
+package com.man.sale.security;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +12,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+
 @Configuration
 @EnableWebSecurity
-public class Websecurity extends WebSecurityConfigurerAdapter 
-{
-
-	private static final Logger logger = LoggerFactory.getLogger(Websecurity.class);
+public class SaleSecurity extends WebSecurityConfigurerAdapter {
+	
+private static final Logger logger = LoggerFactory.getLogger(SaleSecurity.class);
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -47,9 +47,9 @@ public class Websecurity extends WebSecurityConfigurerAdapter
 		
 		
 		http.httpBasic().and().authorizeRequests()
-		    .antMatchers(HttpMethod.GET,"/purchase/**").hasRole("USER")
-		     .antMatchers(HttpMethod.POST,"/purchase/**").hasRole("ADMIN")
-		     .antMatchers(HttpMethod.DELETE, "/purchase/**").hasRole("ADMIN")
+		    .antMatchers(HttpMethod.GET,"/sale/**").hasRole("USER")
+		     .antMatchers(HttpMethod.POST,"/sale/**").hasRole("ADMIN")
+		     .antMatchers(HttpMethod.DELETE, "/sale/**").hasRole("ADMIN")
 		     .and().csrf().disable().formLogin().disable();
 		
 		
@@ -57,10 +57,8 @@ public class Websecurity extends WebSecurityConfigurerAdapter
 		       
 		      
 	}
-	
-	
-	
-	
-	
-}
 
+	
+	
+
+}

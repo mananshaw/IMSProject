@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -78,12 +81,24 @@ public class FinishedproductController {
 	}
 
 	@GetMapping(value = "{id}")
-	@Cacheable(value = "product" , key = "#id")
-	public ProductDto getProduct(@PathVariable("id") int id) {
+//	@Cacheable(value = "product" , key = "#id")
+	
+	public ResponseEntity<ProductDto> getProduct(@PathVariable("id") int id) {
 
+		logger.info("getProductby id method...");
 		logger.error("getProduct method.....Trace Msg");
+		
+		restTemplate.getInterceptors().add(
+				  new BasicAuthorizationInterceptor("admin", "password"));
+		
 		logger.trace("getProduct  method.....Trace Msg");
-		return restTemplate.getForObject("http://localhost:8081/purchase/findbyid/" + id, ProductDto.class);
+
+		//return restTemplate.getForObject("http://localhost:8081/purchase/findbyid/" + id, ProductDto.class);
+	 
+			return restTemplate.exchange(
+					  "http://localhost:8081/purchase/" +id, 
+					  HttpMethod.GET, null, ProductDto.class);
+	
 	}
 
 }
