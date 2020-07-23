@@ -48,8 +48,8 @@ private static final Logger logger = LoggerFactory.getLogger(SaleSecurity.class)
 		
 		http.httpBasic().and().authorizeRequests()
 		    .antMatchers(HttpMethod.GET,"/"+dept+"/**").hasRole("USER")
-		     .antMatchers(HttpMethod.POST,"/"+dept+"/**").hasRole("ADMIN")
-		     .antMatchers(HttpMethod.DELETE, "/"+dept+"/**").hasRole("ADMIN")
+		     //.antMatchers(HttpMethod.POST,"/"+dept+"/**").hasRole("ADMIN")
+		   //  .antMatchers(HttpMethod.DELETE, "/"+dept+"/**").hasRole("ADMIN")
 		     .and().csrf().disable().formLogin().disable();
 		
 		

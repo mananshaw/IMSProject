@@ -27,7 +27,7 @@ public class ProductionSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		
-		auth.inMemoryAuthentication().withUser("user").password("password").roles("user")
+		auth.inMemoryAuthentication().withUser("user").password("password").roles("USER")
 		.and().withUser("admin").password("password").roles("USER","ADMIN");
 		
 		logger.info("Inside Websecurity class in configure method");
@@ -49,6 +49,7 @@ public class ProductionSecurityConfig extends WebSecurityConfigurerAdapter {
 		    .antMatchers(HttpMethod.GET,"/production/**").hasRole("USER")
 		     .antMatchers(HttpMethod.POST,"/production/**").hasRole("ADMIN")
 		     .antMatchers(HttpMethod.DELETE, "/production/**").hasRole("ADMIN")
+		     .antMatchers(HttpMethod.PUT, "/production/**").hasRole("ADMIN")
 		     .and().csrf().disable().formLogin().disable();
 		
 		

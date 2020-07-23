@@ -23,8 +23,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableCaching
 @EnableWebSecurity
-@EnableJpaRepositories("com.man.pro.repos")
-@EntityScan("com.man.pro.entity")
+//@EnableJpaRepositories("com.man.pro.repos")
+//@EntityScan("com.man.pro.entity")
 public class ProductionserviceApplication {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ProductionserviceApplication.class);

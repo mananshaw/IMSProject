@@ -50,9 +50,10 @@ public class Websecurity extends WebSecurityConfigurerAdapter
 		    .antMatchers(HttpMethod.GET,"/purchase/**").hasRole("USER")
 		     .antMatchers(HttpMethod.POST,"/purchase/**").hasRole("ADMIN")
 		     .antMatchers(HttpMethod.DELETE, "/purchase/**").hasRole("ADMIN")
+		     .antMatchers(HttpMethod.PUT, "/purchase/**").hasRole("ADMIN")
 		     .and().csrf().disable().formLogin().disable();
 		
-		
+		    
 		
 		       
 		      

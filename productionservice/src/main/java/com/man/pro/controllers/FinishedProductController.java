@@ -22,6 +22,7 @@ import com.man.pro.dto.FinishedproductDto;
 import com.man.pro.dto.ProductDto;
 import com.man.pro.entity.Finishedproduct;
 import com.man.pro.repos.FinishedproductRepo;
+import com.man.pro.customexception.UserServiceException;
 
 
 @RestController
@@ -66,7 +67,7 @@ public class FinishedproductController {
 
 		logger.error("getFinishedproduct method....Error Msg");
 		
-		
+		if(finishedproduct==null) {throw new UserServiceException("Id not found");}
 		return converter.entityToDto(finishedproduct) ;
 
 	}
@@ -75,8 +76,15 @@ public class FinishedproductController {
 	@CachePut(value = "finishedproduct" , key ="#id")
 	public FinishedproductDto updateFinishedproduct(@PathVariable("id") int id, @RequestBody FinishedproductDto dto) {
 
-		Finishedproduct finishedproduct = converter.dtoToEntity(dto);
+		Finishedproduct finishedproduct = repo.findById(id);
 		logger.error("updateFinishedproduct method.....Trace Msg");
+		
+		if (finishedproduct == null) {
+			throw new UserServiceException("No id found for update");
+		} else {
+			finishedproduct = converter.dtoToEntity(dto);
+		}
+		
 		
 		repo.save(finishedproduct);
 		logger.trace("updateFinishedproduct  method.....Trace Msg");

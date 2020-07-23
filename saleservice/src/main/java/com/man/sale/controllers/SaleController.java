@@ -30,7 +30,7 @@ public class SaleController {
 	private static final Logger logger = LoggerFactory.getLogger(SaleController.class);
 
 	
-	@GetMapping(value="/saleid/{id}")
+	@GetMapping(value="/{id}")
 	public  ResponseEntity<FinishedproductDto> getSaleproduct(@PathVariable ("id") int id ) {
 		
 		

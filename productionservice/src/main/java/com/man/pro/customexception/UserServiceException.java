@@ -1,4 +1,4 @@
-package com.manan.springcloud.exception;
+package com.man.pro.customexception;
 
 public class UserServiceException extends RuntimeException {
 	
